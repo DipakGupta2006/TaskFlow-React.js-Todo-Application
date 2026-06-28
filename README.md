@@ -91,16 +91,6 @@ The app will be available at `http://localhost:3000`.
 
 ---
 
-## 📸 Preview
-
-> *Add a screenshot of your app here for a better visual overview.*
-
-```
-![App Screenshot](./screenshot.png)
-```
-
----
-
 ## 🔮 Future Improvements
 
 - [ ] Add due dates and priority levels for tasks
@@ -125,9 +115,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 👤 Author
 
-**Dipak**
-- GitHub: [@your-username](https://github.com/your-username)
-
+**Dipak Gupta**
 ---
 
 ⭐ If you found this project helpful, consider giving it a star on GitHub!
