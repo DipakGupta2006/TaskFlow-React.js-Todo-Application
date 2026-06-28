@@ -2,12 +2,22 @@ import React, { useState, useEffect } from 'react'
 
 const App = () => {
 
-  const [task, setTask] = useState([]);
+  const [task, setTask] = useState(() => {
+    const savedTask = localStorage.getItem("tasks");
+    return savedTask ? JSON.parse(savedTask) : [];
+  });
+
   const [editIndex, setEditIndex] = useState(null);
 
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
 
+  useEffect(() => {
+    localStorage.setItem(
+      "tasks",
+      JSON.stringify(task)
+    );
+  }, [task]);
 
   const handleTitle = ((e) => {
     setTitle(e.target.value);
