@@ -1,9 +1,313 @@
-*{
-  margin: 0;
-  padding: 0;
+/* ===========================================
+   TODO APP — Professional Responsive Styles
+   Color palette: Deep Navy + Teal accent
+   =========================================== */
+
+:root {
+  --bg-main: #0f172a;        /* deep navy background */
+  --bg-card: #1e293b;        /* slightly lighter navy for cards */
+  --bg-input: #f8fafc;       /* off-white for inputs */
+  --accent: #14b8a6;         /* teal — primary accent */
+  --accent-dark: #0d9488;    /* teal hover */
+  --danger: #ef4444;         /* red for delete */
+  --danger-dark: #dc2626;
+  --text-light: #f1f5f9;     /* light text on dark bg */
+  --text-muted: #94a3b8;     /* muted gray text */
+  --text-dark: #0f172a;      /* dark text on light bg */
+  --border-color: #334155;
+  --completed-color: #64748b;
+  --radius: 10px;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
-.completed {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg-main);
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(20, 184, 166, 0.08), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(20, 184, 166, 0.06), transparent 40%);
+  color: var(--text-light);
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* ===== Centering wrapper ===== */
+#root,
+body > div {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+div:has(> form) {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* ===== Heading (added visually via ::before on form) ===== */
+div:has(> form)::before {
+  content: "✓ Task Flow";
+  display: block;
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 24px;
+  color: var(--text-light);
+  text-align: center;
+}
+
+div:has(> form)::before {
+  background: linear-gradient(135deg, var(--accent), #5eead4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===== Form Card ===== */
+form {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+form p {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+form input[type="text"] {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-input);
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+form input[type="text"]:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.25);
+}
+
+form input[type="text"]::placeholder {
+  color: #94a3b8;
+}
+
+form br {
+  display: none; /* spacing handled via margin instead of <br> */
+}
+
+form p:nth-of-type(2) {
+  margin-top: 18px;
+}
+
+form button {
+  margin-top: 22px;
+  width: 100%;
+  padding: 13px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  box-shadow: 0 4px 14px rgba(20, 184, 166, 0.35);
+}
+
+form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(20, 184, 166, 0.45);
+}
+
+form button:active {
+  transform: translateY(0);
+  opacity: 0.9;
+}
+
+/* ===== Task List ===== */
+ul {
+  list-style: none;
+  width: 100%;
+  margin-top: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+ul li {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 16px 18px 16px 46px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+ul li:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+/* checkbox positioned top-left of card */
+ul li input[type="checkbox"] {
+  position: absolute;
+  top: 18px;
+  left: 16px;
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+ul li h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 6px;
+  word-break: break-word;
+}
+
+ul li p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  word-break: break-word;
+  margin-bottom: 12px;
+}
+
+/* completed state */
+ul li h3.completed,
+ul li p.completed {
   text-decoration: line-through;
-  color: gray;
+  color: var(--completed-color);
+}
+
+/* action buttons row */
+ul li button {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 7px 16px;
+  margin-right: 10px;
+  margin-top: 4px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #fff;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+ul li button:active {
+  transform: scale(0.97);
+}
+
+/* Edit button = first button */
+ul li button:nth-of-type(1) {
+  background: #f59e0b;
+  color: #1c1300;
+}
+
+ul li button:nth-of-type(1):hover {
+  background: #d97706;
+}
+
+/* Delete button = second button */
+ul li button:nth-of-type(2) {
+  background: var(--danger);
+}
+
+ul li button:nth-of-type(2):hover {
+  background: var(--danger-dark);
+}
+
+/* ===== Empty state ===== */
+ul:empty::after {
+  content: "No tasks yet — add one above 👆";
+  display: block;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-top: 30px;
+  width: 100%;
+}
+
+/* ===========================================
+   RESPONSIVE — Mobile Full Screen
+   =========================================== */
+@media (max-width: 600px) {
+  div:has(> form) {
+    padding: 22px 14px 50px;
+    max-width: 100%;
+  }
+
+  div:has(> form)::before {
+    font-size: 1.5rem;
+    margin-bottom: 18px;
+  }
+
+  form {
+    padding: 20px 16px;
+    border-radius: 12px;
+  }
+
+  ul li {
+    padding: 14px 14px 14px 42px;
+  }
+
+  ul li input[type="checkbox"] {
+    top: 16px;
+    left: 14px;
+    width: 18px;
+    height: 18px;
+  }
+
+  ul li button {
+    width: calc(50% - 5px);
+    margin-right: 0;
+    text-align: center;
+  }
+
+  ul li button:nth-of-type(1) {
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 380px) {
+  div:has(> form)::before {
+    font-size: 1.3rem;
+  }
+
+  form button {
+    font-size: 0.95rem;
+  }
 }
