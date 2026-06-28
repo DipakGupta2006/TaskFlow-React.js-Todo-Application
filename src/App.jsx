@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 const App = () => {
 
   const [task, setTask] = useState([]);
+  const [editIndex, setEditIndex] = useState(null);
 
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -16,23 +17,47 @@ const App = () => {
     setDesc(e.target.value);
   });
 
-  const addTask = ((e) => {
+
+
+  const addTask = (e) => {
     e.preventDefault();
+
+    if (title.trim() === '' || desc.trim() === '') {
+      alert('Enter a valid Task');
+      return;
+    }
 
     const data = {
       title: title,
       desc: desc
     };
 
-    setTask([...task, data]);
+    if (editIndex !== null) {
+      const updatedTask = [...task];
+      updatedTask[editIndex] = data;
+      setTask(updatedTask);
+      setEditIndex(null);
+    } else {
+      setTask([...task, data]);
+    }
+
     setTitle("");
     setDesc("");
-  });
+  };
 
+  const deleteTask = (index) => {
+    const updatedTask = task.filter((_, i) => i !== index);
+    setTask(updatedTask);
+  }
+
+  const editTask = (index) => {
+    setTitle(task[index].title);
+    setDesc(task[index].desc);
+    setEditIndex(index);
+  }
 
   return (
     <div>
-
 
       <form>
 
@@ -46,22 +71,21 @@ const App = () => {
 
         <br /><br />
 
-        <button onClick={addTask}>Add Task</button>
+        <button onClick={addTask}>{editIndex !== null ? 'Update Todo' : 'Add Todo'}</button>
       </form>
-
-
-
 
       <ul>
         {task.map((data, index) => (
           <li key={index}>
+            <input type="checkbox" name="" id="" />
             <h3>{data.title}</h3>
 
             <p>
-               {data.desc}
+              {data.desc}
             </p>
 
-            {/* <button onClick={() => editProfile(index)}>Edit</button> */}
+            <button onClick={() => editTask(index)}>Edit</button>
+            <button onClick={() => deleteTask(index)}>Delete</button>
           </li>
         ))}
       </ul>
