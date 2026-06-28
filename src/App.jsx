@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const App = () => {
 
@@ -29,7 +29,8 @@ const App = () => {
 
     const data = {
       title: title,
-      desc: desc
+      desc: desc,
+      completed: false
     };
 
     if (editIndex !== null) {
@@ -44,6 +45,12 @@ const App = () => {
     setTitle("");
     setDesc("");
   };
+
+  const toggleComplete = (index) => {
+    const updatedTask = [...task];
+    updatedTask[index].completed = !updatedTask[index].completed;
+    setTask(updatedTask);
+  }
 
   const deleteTask = (index) => {
     const updatedTask = task.filter((_, i) => i !== index);
@@ -77,13 +84,14 @@ const App = () => {
       <ul>
         {task.map((data, index) => (
           <li key={index}>
-            <input type="checkbox" name="" id="" />
-            <h3>{data.title}</h3>
+            <input type="checkbox" checked={data.completed} onChange={() => toggleComplete(index)} />
+            <h3 className={data.completed ? "completed" : ""}>
+              {data.title}
+            </h3>
 
-            <p>
+            <p className={data.completed ? "completed" : ""}>
               {data.desc}
             </p>
-
             <button onClick={() => editTask(index)}>Edit</button>
             <button onClick={() => deleteTask(index)}>Delete</button>
           </li>
