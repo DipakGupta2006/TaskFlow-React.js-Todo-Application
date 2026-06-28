@@ -1,8 +1,3 @@
-/* ===========================================
-   TODO APP — Professional Responsive Styles
-   Color palette: Deep Navy + Teal accent
-   =========================================== */
-
 :root {
   --bg-main: #0f172a;        /* deep navy background */
   --bg-card: #1e293b;        /* slightly lighter navy for cards */
@@ -37,7 +32,6 @@ body {
   width: 100%;
 }
 
-/* ===== Centering wrapper ===== */
 #root,
 body > div {
   min-height: 100vh;
@@ -58,7 +52,6 @@ div:has(> form) {
   min-height: 100vh;
 }
 
-/* ===== Heading (added visually via ::before on form) ===== */
 div:has(> form)::before {
   content: "✓ Task Flow";
   display: block;
@@ -77,7 +70,6 @@ div:has(> form)::before {
   -webkit-text-fill-color: transparent;
 }
 
-/* ===== Form Card ===== */
 form {
   width: 100%;
   background: var(--bg-card);
@@ -154,7 +146,6 @@ form button:active {
   opacity: 0.9;
 }
 
-/* ===== Task List ===== */
 ul {
   list-style: none;
   width: 100%;
@@ -179,7 +170,6 @@ ul li:hover {
   border-color: var(--accent);
 }
 
-/* checkbox positioned top-left of card */
 ul li input[type="checkbox"] {
   position: absolute;
   top: 18px;
@@ -206,14 +196,12 @@ ul li p {
   margin-bottom: 12px;
 }
 
-/* completed state */
 ul li h3.completed,
 ul li p.completed {
   text-decoration: line-through;
   color: var(--completed-color);
 }
 
-/* action buttons row */
 ul li button {
   font-size: 0.85rem;
   font-weight: 600;
@@ -231,7 +219,6 @@ ul li button:active {
   transform: scale(0.97);
 }
 
-/* Edit button = first button */
 ul li button:nth-of-type(1) {
   background: #f59e0b;
   color: #1c1300;
@@ -241,7 +228,6 @@ ul li button:nth-of-type(1):hover {
   background: #d97706;
 }
 
-/* Delete button = second button */
 ul li button:nth-of-type(2) {
   background: var(--danger);
 }
@@ -250,7 +236,6 @@ ul li button:nth-of-type(2):hover {
   background: var(--danger-dark);
 }
 
-/* ===== Empty state ===== */
 ul:empty::after {
   content: "No tasks yet — add one above 👆";
   display: block;
@@ -261,9 +246,6 @@ ul:empty::after {
   width: 100%;
 }
 
-/* ===========================================
-   RESPONSIVE — Mobile Full Screen
-   =========================================== */
 @media (max-width: 600px) {
   div:has(> form) {
     padding: 22px 14px 50px;
